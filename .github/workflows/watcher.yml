@@ -6,21 +6,37 @@ on:
   workflow_dispatch: # Allows manual triggering (optional)
 
 jobs:
-  run-watcher:
+  run:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
-      - name: Install dependencies
+      - name: Install ntfy CLI
+        shell: bash
         run: |
-          pip install -r requirements.txt || true  # Skip if no file
+          set -euo pipefail
+          sudo apt-get update -y
+          sudo apt-get install -y jq
+          url=$(curl -s https://api.github.com/repos/binwiederhier/ntfy/releases/latest \
+            | jq -r '.assets[] | select(.name | test("linux_amd64\\.tar\\.gz$")) | .browser_download_url')
+          curl -L "$url" -o ntfy.tar.gz
+          tar -xzf ntfy.tar.gz
+          bin_path=$(find . -type f -name ntfy | head -n1)
+          sudo install -m 0755 "$bin_path" /usr/local/bin/ntfy
+          ntfy --version
+
+      - name: Install Python deps
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps
 
       - name: Run watcher
+        env:
+          NTFY_SERVER: https://ntfy.sh
+          HEADLESS: "true"
         run: python watcher.py
