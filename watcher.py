@@ -13,7 +13,7 @@ send_notification("Watcher started: birth registration slot checker is running."
 start_time = datetime.datetime.now()
 
 with sync_playwright() as playwright:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()  # Create a single page to reuse
     
