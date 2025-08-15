@@ -6,7 +6,7 @@ import subprocess
 
 # Add it here, has that shape: https://lambeth.sishost.co.uk/Agenda/OnlineBookings/appointment.html?pg=...
 BIRTH_REBOOK_PAGE = "https://lambeth.sishost.co.uk/Agenda/OnlineBookings/appointment.html?pg=14c073f6-37da-4092-b118-f6beca3bd5a8&pltoken=c7d639c7-9217-404f-a20b-33e1d410645b"
-NTFY_TOPIC = "arthur_lambeth_alert"
+NTFY_TOPIC = "james_lambeth_alert"
 # Compare to 27th August of the same year - change for your case
 COMPARE_DATE_AFTER = datetime(2025, 9, 1)
 COMPARE_DATE_BEFORE = datetime(2025, 8, 18)
