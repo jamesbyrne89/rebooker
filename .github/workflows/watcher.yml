@@ -28,7 +28,6 @@ jobs:
           tar -xzf ntfy.tar.gz
           bin_path=$(find . -type f -name ntfy | head -n1)
           sudo install -m 0755 "$bin_path" /usr/local/bin/ntfy
-          ntfy --version
 
       - name: Install Python deps
         run: |
