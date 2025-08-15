@@ -1,0 +1,26 @@
+name: Run watcher.py every 5 minutes
+
+on:
+  schedule:
+    - cron: "*/5 * * * *" # Every 5 minutes (UTC)
+  workflow_dispatch: # Allows manual triggering (optional)
+
+jobs:
+  run-watcher:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true  # Skip if no file
+
+      - name: Run watcher
+        run: python watcher.py
