@@ -2,7 +2,7 @@ import subprocess
 import time
 import datetime
 from playwright.sync_api import sync_playwright
-from run import run_with_booking_page, run, send_notification
+from run import run_with_booking_page, send_notification
 
 RUN_DURATION_SECONDS = 7 * 24 * 60 * 60
 # How often to run when it crashes (in seconds):

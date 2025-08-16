@@ -34,7 +34,7 @@ def run_with_booking_page(playwright: Playwright, browser, context, page) -> Non
         page.get_by_role("button", name="Next").click()
 
         locator = page.locator("text=The next available appointment is")
-        locator.wait_for(timeout=240000*2)  # 4 minutes in ms
+        locator.wait_for(timeout=60000)
 
         full_text = locator.inner_text()
         print(full_text)
