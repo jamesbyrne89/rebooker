@@ -1,8 +1,6 @@
 name: Run watcher.py
 
 on:
-  schedule:
-    - cron: "*/2 * * * *"
   workflow_dispatch: # Allows manual triggering (optional)
 
 jobs:

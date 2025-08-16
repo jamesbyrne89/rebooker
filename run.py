@@ -29,12 +29,12 @@ def run_with_booking_page(playwright: Playwright, browser, context, page) -> Non
     page.get_by_role("textbox", name="Reason:").fill("Need to book earlier appointment due to travel")
 
     def go_to_next_and_try_to_reserve():
-        # Wait for 3 seconds
-        time.sleep(3)
+        # Wait for 1 second
+        time.sleep(1)
         page.get_by_role("button", name="Next").click()
 
         locator = page.locator("text=The next available appointment is")
-        locator.wait_for(timeout=60000)
+        locator.wait_for(timeout=60000 * 4)
 
         full_text = locator.inner_text()
         print(full_text)
